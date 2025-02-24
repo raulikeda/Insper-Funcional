@@ -7,13 +7,15 @@
 let rec second_max_element list =
   match list with
   | [] -> failwith "empty list"
-  | [x] -> failwith "list with only one element"
-  | h1 :: (h2 :: t) ->
+  | [_] -> failwith "list with only one element"
+  | [x;y] -> if x > y then y else x
+  | h1 :: h2 :: t ->
     let max_tail = max_element t in
     if h1 > max_tail && h2 > max_tail then 
       if h1 > h2 then h2 else h1
-    else second_max_element (h2 :: t)
-    
+    else let h = if h1 > h2 then h1 else h2 in
+    second_max_element (h :: t) ;;
+
 (* Alternativa *)
 
 let rec second_max_element_tail first second list =
